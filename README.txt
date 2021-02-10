@@ -23,6 +23,9 @@ You can activate Database with following python code
     -> python3 clearDB.python
     -> you should delete todo.db with hand
 
+You can start the app with
+    -> python3 app.py
+
 You can test the functions with 
     -> python3 test.python
     -> you should see all functions "pass"    
@@ -39,6 +42,8 @@ Curls
     -> curl -X GET http://127.0.0.1:5000/getTasks/DONE
     move to 
     -> curl -X GET http://127.0.0.1:5000/moveTask/1/INPROGRESS
+
+                            MUHAMMET ENES KAYA
 
 
 
