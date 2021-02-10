@@ -76,10 +76,10 @@ def createTask():
             todo_task=TodoTask(taskId=new_task.id,content=new_task.content)
             db.session.add(todo_task)
             db.session.commit()
-            return "The task with id = %d is added" %new_task.id
+            return jsonify(result = "SUCCESS")
 
         except:
-            return "The task can not be added %s" %data["content"]
+            return jsonify(result = "ERROR - create new task error")
     else:
         pass
 
@@ -144,16 +144,16 @@ def moveTask(id,toTable):
                 try:
                     task_get.tableName = toTable
                     db.session.commit()
-                    return jsonify(result = "SUCCES")
+                    return jsonify(result = "SUCCESS")
                 except: 
-                    return "ERROR 1"
+                    return jsonify(result = "ERROR - task table change error")
 
             except: 
-                return "ERROR 2"
+                return jsonify(result = "ERROR - add task to new table error")
 
             
         except:
-            return "ERROR 3"
+            return jsonify(result = "ERROR - delete task from old table error")
     else:
         pass
 
