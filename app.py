@@ -6,7 +6,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///todo.db'
 
 db=SQLAlchemy(app)
 
-
+#all TASKs table
 class Task(db.Model):
     id = db.Column(db.Integer , primary_key=True)
     tableName = db.Column(db.String(200) , default="TODO")
@@ -16,6 +16,7 @@ class Task(db.Model):
     def __repr__(self):
         return '<Task %r>' %self.id
 
+#all TODO TASKs table
 class TodoTask(db.Model):
     id = db.Column(db.Integer , primary_key=True)
     taskId = db.Column(db.Integer )
@@ -25,7 +26,7 @@ class TodoTask(db.Model):
     def __repr__(self):
         return '<TODO Task %r>' %self.taskId
 
-
+#all InProgress TASKs table
 class InProgressTask(db.Model):
     id = db.Column(db.Integer , primary_key=True)
     taskId = db.Column(db.Integer )
@@ -35,6 +36,7 @@ class InProgressTask(db.Model):
     def __repr__(self):
         return '<In Progress Task %r>' %self.taskId
 
+#all Done TASKs table
 class DoneTask(db.Model):
     id = db.Column(db.Integer , primary_key=True)
     taskId = db.Column(db.Integer )
@@ -45,7 +47,7 @@ class DoneTask(db.Model):
         return '<Done Task %r>' %self.taskId
 
 
-
+#when enter index.html get all tasks 
 @app.route('/', methods=['POST' ,'GET'])
 def index():
 
@@ -60,7 +62,7 @@ def index():
 
 
 
-
+#create task with content parameter 
 @app.route('/createTask', methods=['POST' ,'GET'])
 def createTask():
 
@@ -73,6 +75,7 @@ def createTask():
             db.session.add(new_task)
             db.session.commit()
 
+            #shoul be added to TODO tasks table for initialy
             todo_task=TodoTask(taskId=new_task.id,content=new_task.content)
             db.session.add(todo_task)
             db.session.commit()
@@ -83,7 +86,7 @@ def createTask():
     else:
         pass
 
-
+#get specific table tasks like TODO,INPROGRESS,DONE
 @app.route('/getTasks/<string:table>', methods=['POST' ,'GET'])
 def getTasks(table):
 
@@ -103,7 +106,7 @@ def getTasks(table):
 
 
 
-
+#move to task from one table to another with taks is
 @app.route('/moveTask/<int:id>/<string:toTable>', methods=['POST' ,'GET'])
 def moveTask(id,toTable):
 
@@ -122,7 +125,7 @@ def moveTask(id,toTable):
 
             
             
-            #delete old table
+            #delete task from old table
             db.session.delete(task_remove)
             db.session.commit()
             
