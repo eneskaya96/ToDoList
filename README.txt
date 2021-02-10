@@ -13,9 +13,20 @@ Database
     
 
 Curls
-    -> curl -X POST http://127.0.0.1:5000/get/1
-    -> curl -X GET http://127.0.0.1:5000/get/4
-    -> curl -d '{"content" : "nes"}' -H 'Content-Type: application/json' -X POST  http://127.0.0.1:5000/createTask
+    create task
+    -> curl -d '{"content" : "task 1"}' -H 'Content-Type: application/json' -X POST  http://127.0.0.1:5000/createTask
+    get all tasks
     -> curl -X GET http://127.0.0.1:5000
-    -> curl -d '{"tableName" : "DONE"}'  -H 'Content-Type: application/json'  -X GET http://127.0.0.1:5000/getTasks
-    -> 
+    get specific table task
+    -> curl -X GET http://127.0.0.1:5000/getTasks/TODO
+    -> curl -X GET http://127.0.0.1:5000/getTasks/INPROGRESS
+    -> curl -X GET http://127.0.0.1:5000/getTasks/DONE
+    move to 
+    -> curl -X GET http://127.0.0.1:5000/moveTask/1/INPROGRESS
+
+
+Documentation
+
+    -> html-documentation-generated/index.html
+    -> online link : https://app.swaggerhub.com/apis/ENESKAYA/ToDoList/1.0.0
+    
