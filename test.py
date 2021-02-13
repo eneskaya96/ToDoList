@@ -1,4 +1,4 @@
-import requests, json
+import requests,json
 
 resultOfGetALLTasks = [{'content': 'task 1', 'id': 1, 'tableName': 'TODO'}, {'content': 'task 2', 'id': 2, 'tableName': 'TODO'}]
 resultOfGetTODOTasks = [{'content': 'task 1', 'id': 1}, {'content': 'task 2', 'id': 2}]

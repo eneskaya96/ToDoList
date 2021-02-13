@@ -1,0 +1,11 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "description": "TODO",
+    "version": "1.0.0",
+    "title": "TODO-Python3-Flask-Rest-",
+    "contact": {
+      "email": "enes.kaya95@hotmail.com"
+    }
+  }
+}
