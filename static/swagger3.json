@@ -5,7 +5,7 @@
     "version": "1.0.0",
     "title": "Seans-Python3-Flask-Rest-Boilerplate",
     "license": {
-      "name": "MIT",ss
+      "name": "MIT",
       "url": "https://opensource.org/licenses/MIT"
     }
   },
@@ -21,12 +21,12 @@
     }
   ],
   "paths": {
-    "/request": {
+    "/": {
       "get": {
         "tags": [
-          "Book Request"
+          "Task Operations"
         ],
-        "summary": "Returns bookRequests",
+        "summary": "Returns all tasks",
         "responses": {
           "200": {
             "description": "OK",
@@ -36,37 +36,6 @@
           }
         }
       },
-      "post": {
-        "tags": [
-          "Book Request"
-        ],
-        "summary": "Create a new book request system",
-        "requestBody": {
-          "description": "Book Request Post Object",
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/bookRequestPostBody"
-              }
-            }
-          }
-        },
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "201": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/components/schemas/id"
-            }
-          },
-          "400": {
-            "description": "Failed. Bad post data."
-          }
-        }
-      }
     },
     "/request/{id}": {
       "parameters": [
