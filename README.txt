@@ -33,13 +33,13 @@ You can test the functions with
 You can try with curl command from terminals
 Curls
     create task
-    -> curl -d '{"content" : "task 1"}' -H 'Content-Type: application/json' -X POST  http://127.0.0.1:5000/createTask
+    ->  curl -d '{"content" : "task 1"}' -H 'Content-Type: application/json' -X POST  http://127.0.0.1:5000/task/createTask
     get all tasks
-    -> curl -X GET http://127.0.0.1:5000
+    -> curl -X GET http://127.0.0.1:5000/tasks/getAllTasks
     get specific table task
-    -> curl -X GET http://127.0.0.1:5000/getTasks/TODO
-    -> curl -X GET http://127.0.0.1:5000/getTasks/INPROGRESS
-    -> curl -X GET http://127.0.0.1:5000/getTasks/DONE
+    -> curl -X GET http://127.0.0.1:5000/tasks/getTasks/TODO
+    -> curl -X GET http://127.0.0.1:5000/tasks/getTasks/INPROGRESS
+    -> curl -X GET http://127.0.0.1:5000/tasks/getTasks/DONE
     move to 
     -> curl -X GET http://127.0.0.1:5000/moveTask/1/INPROGRESS
 

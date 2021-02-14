@@ -1,12 +1,12 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "description": "sean",
+    "description": "TODO TASKS",
     "version": "1.0.0",
-    "title": "Seans-Python3-Flask-Rest-Boilerplate",
+    "title": "Python3-Flask-Rest-TODO",
     "license": {
-      "name": "MIT",ss
-      "url": "https://opensource.org/licenses/MIT"
+      "name": "ENES",
+      "url": ""
     }
   },
   "servers": [
@@ -16,169 +16,111 @@
   ],
   "tags": [
     {
-      "name": "Book Request",
-      "description": "Example API for requesting and return book requests"
+      "name": "Tasks",
+      "description": "Task Container Operations"
+    },
+    {
+      "name": "Task",
+      "description": "Task Operations"
     }
   ],
   "paths": {
-    "/request": {
+    "/tasks/getAllTasks": {
       "get": {
         "tags": [
-          "Book Request"
+          "Tasks"
         ],
-        "summary": "Returns bookRequests",
+        "summary": "Returns all available tasks",
         "responses": {
           "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/components/schemas/bookRequests"
-            }
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "Book Request"
-        ],
-        "summary": "Create a new book request system",
-        "requestBody": {
-          "description": "Book Request Post Object",
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/bookRequestPostBody"
-              }
-            }
-          }
-        },
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "201": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/components/schemas/id"
-            }
-          },
-          "400": {
-            "description": "Failed. Bad post data."
+            "description": "OK"
           }
         }
       }
     },
-    "/request/{id}": {
+    "/tasks/getTasks/{table}": {
       "parameters": [
         {
-          "name": "id",
+          "name": "table",
           "in": "path",
           "required": true,
-          "description": "ID of the cat that we want to match",
+          "description": "Table Name, One of them {TODO, INPROGRESS, DONE }",
           "type": "string"
         }
       ],
       "get": {
         "tags": [
-          "Book Request"
+          "Tasks"
         ],
-        "summary": "Get book request with given ID",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "description": "Book Request id",
-            "schema": {
-              "$ref": "#/components/schemas/id"
-            }
-          }
-        ],
+        "summary": "Returns all available tasks in table which name is tableName",
         "responses": {
           "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/components/schemas/bookRequest"
-            }
+            "description": "OK"
           },
           "400": {
             "description": "Failed. Misunderstood Request."
           },
           "404": {
-            "description": "Failed. Book request not found."
+            "description": "Failed. Task request not found."
           }
         }
-      },
-      "put": {
-        "summary": "edit a book request by ID",
+      }
+    },
+    "/task/createTask": {
+      "post": {
         "tags": [
-          "Book Request"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "description": "Book Request id",
-            "schema": {
-              "$ref": "#/components/schemas/id"
-            }
-          }
+          "Task"
         ],
         "requestBody": {
-          "description": "Book Request Object",
+          "description": "Content of Task",
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/bookRequest"
+                "$ref": "#/components/schemas/createTaskPostBody"
               }
             }
           }
         },
-        "produces": [
-          "application/json"
-        ],
+        "summary": "Create a task with content",
         "responses": {
           "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/components/schemas/bookRequest"
-            }
-          },
-          "400": {
-            "description": "Failed. Bad post data."
+            "description": "OK"
           }
         }
-      },
-      "delete": {
-        "summary": "Delete Book Request by ID",
+      }
+    },
+    "/task/moveTask/{id}/{toTable}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "Task id",
+          "type": "string"
+        },
+        {
+          "name": "toTable",
+          "in": "path",
+          "required": true,
+          "description": "Move to toTable , One of them {TODO, INPROGRESS, DONE }",
+          "type": "string"
+        }
+      ],
+      "get": {
         "tags": [
-          "Book Request"
+          "Task"
         ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "description": "Book Request Id",
-            "schema": {
-              "$ref": "#/components/schemas/id"
-            }
-          }
-        ],
+        "summary": "Move to task which id is given to toTable Task",
         "responses": {
-          "204": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/components/schemas/id"
-            }
+          "200": {
+            "description": "OK"
           },
           "400": {
             "description": "Failed. Misunderstood Request."
           },
           "404": {
-            "description": "Failed. Book Request not found."
+            "description": "Failed. Task request not found."
           }
         }
       }
@@ -186,51 +128,12 @@
   },
   "components": {
     "schemas": {
-      "id": {
-        "properties": {
-          "uuid": {
-            "type": "string"
-          }
-        }
-      },
-      "bookRequestPostBody": {
+      "createTaskPostBody": {
         "type": "object",
         "properties": {
-          "title": {
+          "content": {
             "type": "string",
             "format": "string"
-          },
-          "email": {
-            "type": "string",
-            "format": "email"
-          }
-        }
-      },
-      "bookRequest": {
-        "type": "object",
-        "properties": {
-          "title": {
-            "type": "string",
-            "format": "string"
-          },
-          "email": {
-            "type": "string",
-            "format": "email"
-          },
-          "timestamp": {
-            "type": "string",
-            "format": "number"
-          }
-        }
-      },
-      "bookRequests": {
-        "type": "object",
-        "properties": {
-          "bookRequest": {
-            "type": "object",
-            "additionalProperties": {
-              "$ref": "#/components/schemas/bookRequest"
-            }
           }
         }
       }
