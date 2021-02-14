@@ -21,7 +21,7 @@ def get_static():
 
 
 # when enter index.html get all tasks
-@REQUEST_API.route('/', methods=['POST', 'GET'])
+@REQUEST_API.route('/getTask', methods=['POST', 'GET'])
 def index():
     if request.method == 'GET':
         tasks = Task.query.order_by(Task.id).all()
