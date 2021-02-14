@@ -10,7 +10,7 @@ There is a database table
 
 There are 4 API endpoint, its documentation is
 Documentation
-    -> https://guarded-chamber-02082.herokuapp.com/swagger/
+    -> https://guarded-chamber-02082.herokuapp.com/swagger-ui
 
 You can activate virtualenv with following commands
 Virtual enviroment
