@@ -3,10 +3,10 @@ from flask import Flask
 from routes import request_api
 from models import db
 
-APP = Flask(__name__)
-APP.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///todo.db'
+app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///todo.db'
 
-db.init_app(APP)
+db.init_app(app)
 
 ### swagger specific ###
 SWAGGER_URL = '/swagger'
@@ -18,9 +18,9 @@ SWAGGERUI_BLUEPRINT = get_swaggerui_blueprint(
         'app_name': "TODO-Python-Flask-REST"
     }
 )
-APP.register_blueprint(SWAGGERUI_BLUEPRINT, url_prefix=SWAGGER_URL)
+app.register_blueprint(SWAGGERUI_BLUEPRINT, url_prefix=SWAGGER_URL)
 ### end swagger specific ###
-APP.register_blueprint(request_api.get_blueprint())
+app.register_blueprint(request_api.get_blueprint())
 
 if __name__ == "__main__":
-    APP.run(debug=True)
+    app.run(debug=True)
