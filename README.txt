@@ -2,7 +2,7 @@ This is project for Python - FLASK
 
 This simple TO DO List project
 
-There are four database table 
+There is a database table
     -> TASKS -- keeps all tasks
     -> TODOTASK -- keeps task which are in TODO state
     -> INPROGRES -- keeps task which are in INPROGRES state
@@ -10,17 +10,18 @@ There are four database table
 
 There are 4 API endpoint, its documentation is
 Documentation
-    -> html-documentation-generated/index.html
-    -> online link : https://app.swaggerhub.com/apis/ENESKAYA/ToDoList/1.0.0
+    -> https://guarded-chamber-02082.herokuapp.com/swagger/
 
 You can activate virtualenv with following commands
 Virtual enviroment
     -> virtualenv env
     -> source env/bin/activate
 
+Heroku
+    -> git push --force heroku master
+    -> heroku logs --tail
 
 You can activate Database with following python code
-    -> python3 clearDB.python
     -> you should delete todo.db with hand
 
 You can start the app with
@@ -41,7 +42,7 @@ Curls
     -> curl -X GET http://127.0.0.1:5000/tasks/getTasks/INPROGRESS
     -> curl -X GET http://127.0.0.1:5000/tasks/getTasks/DONE
     move to 
-    -> curl -X GET http://127.0.0.1:5000/moveTask/1/INPROGRESS
+    ->  curl -X GET http://127.0.0.1:5000/task/moveTask/1/INPROGRESS
 
                             MUHAMMET ENES KAYA
 

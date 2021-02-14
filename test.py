@@ -1,17 +1,20 @@
 import requests,json
+from decouple import config
 
-resultOfGetALLTasks = [{'content': 'task 1', 'id': 1, 'tableName': 'TODO'}, {'content': 'task 2', 'id': 2, 'tableName': 'TODO'}]
+resultOfGetALLTasks = [{'content': 'task 1', 'id': 1, 'table_name': 'TODO'}, {'content': 'task 2', 'id': 2, 'table_name': 'TODO'}]
 resultOfGetTODOTasks = [{'content': 'task 1', 'id': 1}, {'content': 'task 2', 'id': 2}]
 resultOfGetProgressTasks = []
 
 newResultOfGetTODOTasks = [{'content': 'task 2', 'id': 2}]
 newResultOfGetProgressTasks = [{'content': 'task 1', 'id': 1}]
 
-urlCreteTask = "http://127.0.0.1:5000/createTask"
-urlgetTasks = "http://127.0.0.1:5000"
-urlgetTODOTasks = "http://127.0.0.1:5000/getTasks/TODO"
-urlgetPROGRESSTasks = "http://127.0.0.1:5000/getTasks/INPROGRESS"
-urlgetmoveTask = "http://127.0.0.1:5000/moveTask/1/INPROGRESS"
+url = config('URL')
+
+urlCreteTask = url + "/task/createTask"
+urlgetTasks = url + "/tasks/getAllTasks"
+urlgetTODOTasks = url + "/tasks/getTasks/TODO"
+urlgetPROGRESSTasks = url + "/tasks/getTasks/INPROGRESS"
+urlgetmoveTask = url + "/task/moveTask/1/INPROGRESS"
 
 
 headers = {"Content-type": "application/json"}
