@@ -33,17 +33,17 @@ with app.app_context():
     db.create_all()
 
 
-class get_all_tasks_response_schema(Schema):
+class TasksResponseSchema(Schema):
     message = fields.Str(default='Success')
 
 
-class get_all_request_Schema(Schema):
+class TaskRequestSchema(Schema):
     content = fields.String(required=True, description="content of task")
 
 
 class GetAllTaskAPI(MethodResource, Resource):
     @doc(description='Get all tasks.', tags=['Tasks'])
-    @marshal_with(get_all_tasks_response_schema)
+    @marshal_with(TasksResponseSchema)
     def get(self):
         Tasks = TaskContainer.query.order_by(TaskContainer.id).all()
         AllTasks = [{'id': Task.id, 'content': Task.content, 'table_name': Task.table_name} for Task in Tasks]
@@ -56,11 +56,11 @@ docs.register(GetAllTaskAPI)
 # get specific table tasks like TODO,INPROGRESS,DONE
 class GetTaskAPI(MethodResource, Resource):
     @doc(description='Get specific tasks.', tags=['Tasks'])
-    @marshal_with(get_all_tasks_response_schema)
+    @marshal_with(TasksResponseSchema)
     def get(self, table):
-        tasks = TaskContainer.query.filter_by(table_name=table).all()
-        all_tasks = [{'content': task.content, 'id': task.id} for task in tasks]
-        return jsonify(all_tasks)
+        Tasks = TaskContainer.query.filter_by(table_name=table).all()
+        AllTasks = [{'content': Task.content, 'id': Task.id} for Task in Tasks]
+        return jsonify(AllTasks)
 
 api.add_resource(GetTaskAPI, '/tasks/getTasks/<string:table>')
 docs.register(GetTaskAPI)
@@ -74,13 +74,13 @@ class CreateTaskAPI(MethodResource, Resource):
         ),
     }
     @doc(description='Create  Task with content', tags=['Task'])
-    @marshal_with(get_all_tasks_response_schema)
+    @marshal_with(TasksResponseSchema)
     @use_kwargs(args)
     def post(self,content):
-        new_task = TaskContainer(content=content, table_name="TODO")
+        NewTask = TaskContainer(content=content, table_name="TODO")
 
         try:
-            db.session.add(new_task)
+            db.session.add(NewTask)
             db.session.commit()
 
             return jsonify(result="SUCCESS")
@@ -94,11 +94,11 @@ docs.register(CreateTaskAPI)
 # move to task from one table to another with taks is
 class MoveTaskAPI(MethodResource, Resource):
     @doc(description='Move Task with id  to toTable', tags=['Task'])
-    @marshal_with(get_all_tasks_response_schema)
+    @marshal_with(TasksResponseSchema)
     def get(self, id, to_table):
-        task_get = TaskContainer.query.get_or_404(id)
+        TaskGet = TaskContainer.query.get_or_404(id)
         try:
-            task_get.table_name = to_table
+            TaskGet.table_name = to_table
             db.session.commit()
             return jsonify(result="SUCCESS")
         except:
